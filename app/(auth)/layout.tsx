@@ -4,7 +4,7 @@ import '../globals.css'
 
 export const metadata = {
   title: 'Threads',
-  description: 'Bext.js Meta Threads App'
+  description: 'Next.js Meta Threads App'
 }
 
 const inter = Inter({subsets: ['latin']})
