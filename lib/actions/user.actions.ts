@@ -4,14 +4,16 @@ import { revalidatePath } from 'next/cache';
 import User from '../models/user.model';
 import { connectToDb } from '../mongoose';
 
-export async function updateUser(
-  userId: string,
-  username: string,
-  name: string,
-  bio: string,
-  image: string,
-  path: string
-) {
+interface Params {
+  userId: string;
+  username: string;
+  name: string;
+  bio: string;
+  image: string;
+  path: string;
+}
+
+export async function updateUser({ userId, username, name, bio, image, path }: Params) {
   connectToDb();
 
   try {
@@ -20,7 +22,7 @@ export async function updateUser(
       { username: username.toLowerCase(), name, bio, image, onboarded: true },
       { upsert: true }
     );
-  
+
     if (path === '/profile/edit') {
       revalidatePath(path);
     }
