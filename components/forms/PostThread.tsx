@@ -7,9 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
+import { createThread } from '@/lib/actions/thread.actions';
 
 // import { updateUser } from '@/lib/actions/user.actions';
 import { ThreadValidation } from '@/lib/validations/thread';
+import { getRandomValues } from 'crypto';
 
 interface Props {
   user: {
@@ -35,8 +37,15 @@ function PostThread({ userId }: { userId: string }) {
     },
   });
 
-  const onSubmit = () => {
-    
+  const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+    await createThread({
+      text: values.thread,
+      author: userId,
+      communityId: null,
+      path: pathname,
+    });
+
+    router.push('/')
   };
 
   return (
