@@ -11,7 +11,6 @@ import { createThread } from '@/lib/actions/thread.actions';
 
 // import { updateUser } from '@/lib/actions/user.actions';
 import { ThreadValidation } from '@/lib/validations/thread';
-import { getRandomValues } from 'crypto';
 
 interface Props {
   user: {
